@@ -2,6 +2,7 @@ package in.yefindia.yef.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import in.yefindia.yef.R;
 
@@ -11,5 +12,6 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        Toast.makeText(this,"Push1",Toast.LENGTH_SHORT).show();
     }
 }
