@@ -14,5 +14,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         Toast.makeText(this,"Push1",Toast.LENGTH_SHORT).show();
         Toast.makeText(this, "This is 2nd push", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "This is 3rd push", Toast.LENGTH_SHORT).show();
     }
 }
