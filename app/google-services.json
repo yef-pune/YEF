@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "983812905342",
+    "firebase_url": "https://yef-pune.firebaseio.com",
+    "project_id": "yef-pune",
+    "storage_bucket": "yef-pune.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983812905342:android:10f25d621c7cb7b2",
+        "android_client_info": {
+          "package_name": "in.yefindia.yef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983812905342-f6k8ma03iv724u2a616k1hlq15gblagb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.yefindia.yef",
+            "certificate_hash": "8a040b3b950d0f85315e552cebcb271cc694b1bf"
+          }
+        },
+        {
+          "client_id": "983812905342-4nd1k6k0t23t9ts93ilkvuom7hm5qb5c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJkccQ7_ATLzSjes2QFUUjWbW4rx9_W5c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983812905342-4nd1k6k0t23t9ts93ilkvuom7hm5qb5c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
