@@ -6,4 +6,7 @@ package in.yefindia.yef.utils;
 
 public class Utils {
 
+    //DOMAIN
+    public static final String DOMAIN="gmail.com";
+
 }
