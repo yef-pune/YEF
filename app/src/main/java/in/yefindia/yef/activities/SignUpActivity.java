@@ -1,8 +1,10 @@
 package in.yefindia.yef.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -116,7 +118,6 @@ public class SignUpActivity extends AppCompatActivity {
                         sendVerificationMail();
                         addUserNameToDb(fullName, contactNumber, state, city, email);
                         FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(getApplicationContext(), SignInActivity.class));
                     } else{
                         Toast.makeText(getApplicationContext(), "" + task.getException(), Toast.LENGTH_LONG).show();
 
@@ -124,8 +125,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
         });
-
-
 
     }
 
@@ -138,7 +137,20 @@ public class SignUpActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if(firebaseUser!=null){
                     if(task.isSuccessful()){
-                        Toast.makeText(getApplicationContext(),"Verification mail sent",Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+                        builder.setCancelable(false)
+                                .setTitle(Utils.REGISTERATION_SUCESSFUL)
+                                .setIcon(R.drawable.ic_done_black_32dp)
+                                .setMessage(Utils.REGISTERATION_SUCESSFUL_MESSAGE_1 + " " + mEmail.getEditText().getText().toString() +
+                                        System.getProperty("line.separator") + Utils.REGISTERATION_SUCESSFUL_MESSAGE_2)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                        finish();
+                                    }
+                                });
+                        builder.show();
                     }else{
                         Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
                     }
@@ -153,7 +165,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         UserDetailsModel mUser = new UserDetailsModel(fullName,contactNumber,state,city,email);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        reference.child("USER_DETAILS")
+        reference.child(Utils.FIREBASE_USERS_CHILD_NODE)
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .setValue(mUser);
         FirebaseAuth.getInstance().signOut();
