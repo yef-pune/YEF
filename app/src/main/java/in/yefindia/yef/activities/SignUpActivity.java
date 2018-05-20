@@ -106,6 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
+
     //Method to add user
     private void register(final String fullName, final String contactNumber, final String state, final String city, final String email, final String password) {
         progressDialog = new ProgressDialog(SignUpActivity.this);
