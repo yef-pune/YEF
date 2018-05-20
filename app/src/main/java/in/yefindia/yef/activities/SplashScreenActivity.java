@@ -9,7 +9,8 @@ import in.yefindia.yef.R;
 public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         Toast.makeText(this,"Push1",Toast.LENGTH_SHORT).show();
