@@ -1,4 +1,4 @@
-package in.yefindia.yef.activities;
+package in.yefindia.yef.model;
 
 public class UserDetailsModel {
 
@@ -11,6 +11,7 @@ public class UserDetailsModel {
         this.city = city;
         this.email=email;
     }
+
 
 
 }
