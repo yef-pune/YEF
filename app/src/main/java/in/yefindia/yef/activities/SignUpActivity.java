@@ -1,7 +1,7 @@
 package in.yefindia.yef.activities;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
@@ -15,18 +15,20 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import in.yefindia.yef.R;
+import in.yefindia.yef.model.UserDetailsModel;
 import in.yefindia.yef.utils.Utils;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    TextInputLayout mFullName, mEmail, mContactNumber, mState, mCity, mPassword, mConfirmPassword;
-    Button signupButton;
+    private TextInputLayout mFullName, mEmail, mContactNumber, mState, mCity, mPassword, mConfirmPassword;
+    private Button signupButton;
+    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
                         mEmail.getEditText().getText().toString(),
                         mPassword.getEditText().getText().toString(),
                         mConfirmPassword.getEditText().getText().toString()
-                        );
+                );
             }
         });
 
@@ -60,15 +62,12 @@ public class SignUpActivity extends AppCompatActivity {
         mCity = findViewById(R.id.editText_city);
         mPassword = findViewById(R.id.editText_passwordSignUp);
         mConfirmPassword = findViewById(R.id.editText_confirmPassword);
-
-        //Button
         signupButton = findViewById(R.id.button_signUp);
 
     }
 
     //Method to check Empty Fields
     private boolean isEmpty(String string) {
-
         return string.equals("");
     }
 
@@ -83,45 +82,50 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     //Method to check weather all validations are correct
-    private void checkValidationAndAttempRegisteration(final String fullName,final String contactNumber,final String state,final String city,final String email,final String password,final String conPass) {
-        if(!isEmpty(fullName) && !isEmpty(contactNumber) && !isEmpty(state) && !isEmpty(city) && !isEmpty(email) && !isEmpty(email) && !isEmpty(conPass)){
-            if(doPasswordsMatch(password,conPass)){
-                if(checkDomain(email)){
-                    if(checkPasswordLength(password)){
-                        if(checkContctNumberLength(contactNumber)){
-                            register(fullName,contactNumber,state,city,email,password);
-                        }else{
+    private void checkValidationAndAttempRegisteration(final String fullName, final String contactNumber, final String state, final String city, final String email, final String password, final String conPass) {
+        if (!isEmpty(fullName) && !isEmpty(contactNumber) && !isEmpty(state) && !isEmpty(city) && !isEmpty(email) && !isEmpty(email) && !isEmpty(conPass)) {
+            if (doPasswordsMatch(password, conPass)) {
+                if (checkDomain(email)) {
+                    if (checkPasswordLength(password)) {
+                        if (checkContctNumberLength(contactNumber)) {
+                            register(fullName, contactNumber, state, city, email, password);
+                        } else {
                             mContactNumber.getEditText().setError("Invalid Contact Number");
                         }
-                    }else {
-                            mPassword.getEditText().setError("Password must be equal to or greater than 6 characters");
+                    } else {
+                        mPassword.getEditText().setError("Password must be equal to or greater than 6 characters");
                     }
-                }else{
+                } else {
                     mEmail.getEditText().setError("Domain must be @gmail.com");
                 }
-            }else{
+            } else {
                 mConfirmPassword.getEditText().setError("Passwords don't match");
             }
-        }else{
+        } else {
             Toast.makeText(getApplicationContext(), "Please fill in all the details", Toast.LENGTH_SHORT).show();
         }
     }
 
-    //Method to add user
-    private void register(final String fullName,final String contactNumber,final String state,final String city,final String email,final String password) {
 
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    //Method to add user
+    private void register(final String fullName, final String contactNumber, final String state, final String city, final String email, final String password) {
+        progressDialog = new ProgressDialog(SignUpActivity.this);
+        progressDialog.setMessage("Registering...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        FirebaseAuth.getInstance()
+                .createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
-                        sendVerificationMail();
-                        addUserNameToDb(fullName, contactNumber, state, city, email);
-                        FirebaseAuth.getInstance().signOut();
-                    } else{
-                        Toast.makeText(getApplicationContext(), "" + task.getException(), Toast.LENGTH_LONG).show();
-
-                    }
+                    Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
+                    sendVerificationMail();
+                    addUserNameToDb(fullName, contactNumber, state, city, email);
+                    FirebaseAuth.getInstance().signOut();
+                } else {
+                    Toast.makeText(getApplicationContext(), "" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                }
+                progressDialog.cancel();
             }
 
         });
@@ -129,18 +133,18 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     //Method to send verification mail
-    private void sendVerificationMail(){
-        final FirebaseUser firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
+    private void sendVerificationMail() {
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(firebaseUser!=null){
-                    if(task.isSuccessful()){
+                if (firebaseUser != null) {
+                    if (task.isSuccessful()) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                         builder.setCancelable(false)
                                 .setTitle(Utils.REGISTERATION_SUCESSFUL)
-                                .setIcon(R.drawable.ic_done_black_32dp)
+//                                .setIcon(R.drawable.ic_done_black_32dp)
                                 .setMessage(Utils.REGISTERATION_SUCESSFUL_MESSAGE_1 + " " + mEmail.getEditText().getText().toString() +
                                         System.getProperty("line.separator") + Utils.REGISTERATION_SUCESSFUL_MESSAGE_2)
                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -151,8 +155,8 @@ public class SignUpActivity extends AppCompatActivity {
                                     }
                                 });
                         builder.show();
-                    }else{
-                        Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -161,9 +165,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     //Method to add user details to Firebase Database
-    public void addUserNameToDb(final String fullName,final String contactNumber,final String state,final String city,final String email) {
+    public void addUserNameToDb(final String fullName, final String contactNumber, final String state, final String city, final String email) {
 
-        UserDetailsModel mUser = new UserDetailsModel(fullName,contactNumber,state,city,email);
+        UserDetailsModel mUser = new UserDetailsModel(fullName, contactNumber, state, city, email);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         reference.child(Utils.FIREBASE_USERS_CHILD_NODE)
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -172,15 +176,13 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     //Method to check password length (Current Length: 6)
-    private boolean checkPasswordLength(String pass){
-
-        return pass.length()>=6;
+    private boolean checkPasswordLength(String pass) {
+        return pass.length() >= 6;
     }
 
     //Method to check contact number length
-    private boolean checkContctNumberLength(String contactNumber){
-
-        return contactNumber.length()==10;
+    private boolean checkContctNumberLength(String contactNumber) {
+        return contactNumber.length() == 10;
     }
 
 }
