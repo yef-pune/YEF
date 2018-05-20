@@ -15,6 +15,9 @@ public class Utils {
     //Registeration Successfull
     public static final String REGISTERATION_SUCESSFUL="Registeration Successfull";
 
+    //Resend Verification code
+    public static final String RESEND_VERIFICATION="Resend Verification Code";
+
     //Registeration Message 1
     public static final String REGISTERATION_SUCESSFUL_MESSAGE_1="You have registered successfully.The verification mail has been sent to";
 
