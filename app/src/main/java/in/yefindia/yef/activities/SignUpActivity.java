@@ -66,28 +66,13 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-    //Method to check Empty Fields
-    private boolean isEmpty(String string) {
-        return string.equals("");
-    }
-
-    //Method to check domain
-    private boolean checkDomain(String email) {
-        return (email.substring(email.indexOf('@') + 1).toLowerCase()).equals(Utils.DOMAIN);
-    }
-
-    //Method to check weather both the passwords match
-    private boolean doPasswordsMatch(String passOne, String conPass) {
-        return passOne.equals(conPass);
-    }
-
     //Method to check weather all validations are correct
     private void checkValidationAndAttempRegisteration(final String fullName, final String contactNumber, final String state, final String city, final String email, final String password, final String conPass) {
-        if (!isEmpty(fullName) && !isEmpty(contactNumber) && !isEmpty(state) && !isEmpty(city) && !isEmpty(email) && !isEmpty(email) && !isEmpty(conPass)) {
-            if (doPasswordsMatch(password, conPass)) {
-                if (checkDomain(email)) {
-                    if (checkPasswordLength(password)) {
-                        if (checkContctNumberLength(contactNumber)) {
+        if (!Utils.isEmpty(fullName) && !Utils.isEmpty(contactNumber) && !Utils.isEmpty(state) && !Utils.isEmpty(city) && !Utils.isEmpty(email) && !Utils.isEmpty(email) && !Utils.isEmpty(conPass)) {
+            if (Utils.doPasswordsMatch(password, conPass)) {
+                if (Utils.checkDomain(email)) {
+                    if (Utils.checkPasswordLength(password)) {
+                        if (Utils.checkContctNumberLength(contactNumber)) {
                             register(fullName, contactNumber, state, city, email, password);
                         } else {
                             mContactNumber.getEditText().setError("Invalid Contact Number");
@@ -118,7 +103,6 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
                     sendVerificationMail();
                     addUserNameToDb(fullName, contactNumber, state, city, email);
                     FirebaseAuth.getInstance().signOut();
@@ -173,16 +157,6 @@ public class SignUpActivity extends AppCompatActivity {
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .setValue(mUser);
         FirebaseAuth.getInstance().signOut();
-    }
-
-    //Method to check password length (Current Length: 6)
-    private boolean checkPasswordLength(String pass) {
-        return pass.length() >= 6;
-    }
-
-    //Method to check contact number length
-    private boolean checkContctNumberLength(String contactNumber) {
-        return contactNumber.length() == 10;
     }
 
 }
