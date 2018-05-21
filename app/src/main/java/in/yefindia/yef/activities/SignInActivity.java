@@ -18,8 +18,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import in.yefindia.yef.Dialogs.ResendEmailDialog;
-import in.yefindia.yef.Dialogs.ResetPasswordDialog;
+import in.yefindia.yef.dialogs.ResendEmailDialog;
+import in.yefindia.yef.dialogs.ResetPasswordDialog;
 import in.yefindia.yef.R;
 import in.yefindia.yef.utils.Utils;
 

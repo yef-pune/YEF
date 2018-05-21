@@ -1,4 +1,4 @@
-package in.yefindia.yef.Dialogs;
+package in.yefindia.yef.dialogs;
 
 import android.content.Context;
 import android.os.Bundle;
