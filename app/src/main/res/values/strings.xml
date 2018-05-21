@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">YEF</string>
+    <string name="enterEmail">Enter registered email</string>
+    <string name="enterPassword">Enter password</string>
 </resources>
