@@ -83,6 +83,7 @@ public class ResendEmailDialog extends DialogFragment {
                                 if(user.isEmailVerified()){
                                     Toast.makeText(getActivity(),"The email has been verified already.Please log in",Toast.LENGTH_LONG).show();
                                     FirebaseAuth.getInstance().signOut();
+                                    getDialog().dismiss();
                                 }else {
                                 resendVerificationEmail();
                                 FirebaseAuth.getInstance().signOut();
