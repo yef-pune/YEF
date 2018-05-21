@@ -78,9 +78,17 @@ public class ResendEmailDialog extends DialogFragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            resendVerificationEmail();
-                            FirebaseAuth.getInstance().signOut();
-                            getDialog().dismiss();
+                            FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+                            if(user!=null){
+                                if(user.isEmailVerified()){
+                                    Toast.makeText(getActivity(),"The email has been verified already.Please log in",Toast.LENGTH_LONG).show();
+                                    FirebaseAuth.getInstance().signOut();
+                                }else {
+                                resendVerificationEmail();
+                                FirebaseAuth.getInstance().signOut();
+                                getDialog().dismiss();
+                                }
+                            }
                         }
                     }
                 })
