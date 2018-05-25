@@ -7,6 +7,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,12 +39,13 @@ public class HomeActivity extends AppCompatActivity {
     private TextView userName;
     private TextView userEmail;
     private ImageView verIcon;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         setupupFirebseAuth();
         setupNavigationView();
         getAndSetUserData();
@@ -70,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
+                        Log.e(TAG, "onCancelled: "+databaseError.getMessage() );
                     }
                 });
             }
@@ -83,13 +85,12 @@ public class HomeActivity extends AppCompatActivity {
         drawerLayout=findViewById(R.id.drawerHomeNavigation);
         Toolbar toolbar =findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_drawer);
-
-
         navigationView=findViewById(R.id.nav_view);
-
+        actionBarDrawerToggle=
+                new ActionBarDrawerToggle(HomeActivity.this,drawerLayout,R.string.openString,R.string.closeString);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item)
@@ -114,9 +115,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void checkAuthenticationState(){
         Log.d(TAG,"checkAuthenticationState: checking authenticating state");
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         if(user == null)
         {
             Log.d(TAG,"checkAuthenticationState: user is null, navigating back to login screen.");

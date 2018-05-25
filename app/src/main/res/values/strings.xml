@@ -4,6 +4,12 @@
     <string name="enterPassword">Enter password</string>
     <string name="placeholder">PLACEHOLDER</string>
 
+
+    <string name="openString">Open</string>
+    <string name="closeString">Close</string>
+
+
+
     //Navigation Bar Menu Labels
     <string name="home">Home</string>
     <string name="careerGuidance">Career Guidance</string>
@@ -15,6 +21,26 @@
     <string name="talkToUs">Talk to Us</string>
     <string name="aboutApp">About the app</string>
     <string name="signOut">Sign Out</string>
+    <string name="signIn">Sign In</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="signUp">Sign Up</string>
+    <string name="resend_verification_link">Resend Verification link</string>
+    <string name="forgotPassword">Forgot Password</string>
+    <string name="shortPassword">Password must contain at least 6 characters</string>
+    <string name="invalidEmail">Invalid email</string>
+    <string name="emptyForm">Please fill all the details</string>
+    <string name="dialogResendEmail">Email Address Not Verified</string>
+    <string name="dialogMsgResendEmail">Please verify email address. If you didn\'t received verification email please select resend verification link.</string>
+    <string name="fullName">Full Name</string>
+    <string name="contactNumber">Contact Number</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="invalidContactNumber">Invalid Contact Number</string>
+    <string name="passwordNotMatched">Passwords don\'t match</string>
+    <string name="registering">Registering...</string>
+    <string name="somethingWrong">Something went wrong</string>
 
 
 </resources>

@@ -16,7 +16,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Sign In"
+        android:text="@string/signIn"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:singleLine="true" />
 
@@ -63,7 +63,7 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
@@ -76,7 +76,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Sign In"
+        android:onClick="attemptLogin"
+        android:text="@string/signIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_passwordSignIn" />
@@ -91,7 +92,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:onClick="gotoSignUp"
-        android:text="Sign Up"
+        android:text="@string/signUp"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,8 +107,9 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="124dp"
-        android:text="Resend Verification link"
+        android:onClick="sendVerificationMail"
         android:textSize="18sp"
+        android:text="@string/resend_verification_link"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +121,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:text="Forgot Password"
+        android:text="@string/forgotPassword"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textView_gotoResendverificationlink"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,13 +1,17 @@
 package in.yefindia.yef.activities;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,31 +29,27 @@ import in.yefindia.yef.utils.Utils;
 
 public class SignInActivity extends AppCompatActivity {
 
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = "SignInActivity";
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    TextInputLayout editTextEmail,editTextPassword;
-    Button signinButton;
-    TextView resendMail,forgotPassword;
+    private TextInputLayout editTextEmail,editTextPassword;
+    private TextView textResendMail,textforgotPassword;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
-        initializeViews();
+        editTextEmail=findViewById(R.id.editText_emailSignIn);
+        editTextPassword=findViewById(R.id.editText_passwordSignIn);
+        textResendMail=findViewById(R.id.textView_gotoResendverificationlink);
+        textforgotPassword=findViewById(R.id.textView_forgotPassword);
+        progressDialog=new ProgressDialog(SignInActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Please wait...");
         clearFields();
-
         setupupFirebseAuth();
-
-        resendMail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              sendVerificationMail();
-            }
-        });
-
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
+        textforgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ResetPasswordDialog dialog = new ResetPasswordDialog();
@@ -57,70 +57,49 @@ public class SignInActivity extends AppCompatActivity {
 
             }
         });
-
-        signinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                attemptLogin();
-            }
-        });
     }
 
 
-    private void initializeViews(){
-        editTextEmail=findViewById(R.id.editText_emailSignIn);
-        editTextPassword=findViewById(R.id.editText_passwordSignIn);
-        resendMail=findViewById(R.id.textView_gotoResendverificationlink);
-        forgotPassword=findViewById(R.id.textView_forgotPassword);
-        signinButton=findViewById(R.id.button_signIn);
-
-    }
-
-    private void attemptLogin() {
+    public void attemptLogin(View view) {
         //check if fields are filled out
-
+        progressDialog.show();
           if(!Utils.isEmpty(editTextEmail.getEditText().getText().toString()) && !Utils.isEmpty(editTextPassword.getEditText().getText().toString())){
               if(Utils.checkDomain(editTextEmail.getEditText().getText().toString())){
                   if(Utils.checkPasswordLength(editTextPassword.getEditText().getText().toString())){
-                      Log.d(TAG,"OnClick:attempting to authenticate.");
-                      //showDialog();
                       FirebaseAuth.getInstance().signInWithEmailAndPassword(editTextEmail.getEditText().getText().toString(),
                               editTextPassword.getEditText().getText().toString())
                               .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                   @Override
                                   public void onComplete(@NonNull Task<AuthResult> task) {
                                       if (task.isSuccessful()) {
-
+                                          progressDialog.cancel();
                                       }
                                   }
                               })
                               .addOnFailureListener(new OnFailureListener() {
                                   @Override
                                   public void onFailure(@NonNull Exception e) {
-                                      Toast.makeText(SignInActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-                                      //hideDialog();
+                                      Toast.makeText(SignInActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                      progressDialog.cancel();
                                   }
                               });
                   }else{
-                      editTextPassword.getEditText().setError("Password must be equal to or greater than 6 characters");
+                      editTextPassword.getEditText().setError(getString(R.string.shortPassword));
                   }
 
               }else{
-
-                  editTextEmail.getEditText().setError("Invalid email domain");
+                  editTextEmail.getEditText().setError(getString(R.string.invalidEmail));
               }
           }else {
-              Toast.makeText(getApplicationContext(),"Please fill all the details",Toast.LENGTH_SHORT).show();
+              Toast.makeText(SignInActivity.this, R.string.emptyForm,Toast.LENGTH_SHORT).show();
           }
-
            }
 
     public void gotoSignUp(View view) {
         startActivity(new Intent(SignInActivity.this,SignUpActivity.class));
     }
 
-    private void sendVerificationMail() {
-
+    public void sendVerificationMail(View view) {
         ResendEmailDialog dialog = new ResendEmailDialog();
         dialog.show(getSupportFragmentManager(), "dialog_resend_email_verification");
     }
@@ -137,13 +116,23 @@ public class SignInActivity extends AppCompatActivity {
 
                 if (user != null)
                 {
-                    //check if email is verified
                     if(user.isEmailVerified()){
-                        Log.d(TAG,"OnAuthStateChenged:signed_in:"+user.getUid());
+                        Log.d(TAG,"OnAuthStateChanged:signed_in:  "+user.getUid());
                         startActivity(new Intent(SignInActivity.this,HomeActivity.class));
                         finish();
                     }else{
-                        Toast.makeText(SignInActivity.this, "Check Your Email For Verification link ", Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(SignInActivity.this);
+                        builder.setCancelable(true)
+                                .setTitle(R.string.dialogResendEmail)
+//                                .setIcon(R.drawable.ic_done_black_32dp)
+                                .setMessage(R.string.dialogMsgResendEmail)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        builder.show();
                         FirebaseAuth.getInstance().signOut();
                     }
 

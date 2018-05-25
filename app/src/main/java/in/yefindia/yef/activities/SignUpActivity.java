@@ -75,19 +75,19 @@ public class SignUpActivity extends AppCompatActivity {
                         if (Utils.checkContctNumberLength(contactNumber)) {
                             register(fullName, contactNumber, state, city, email, password);
                         } else {
-                            mContactNumber.getEditText().setError("Invalid Contact Number");
+                            mContactNumber.getEditText().setError(getString(R.string.invalidContactNumber));
                         }
                     } else {
-                        mPassword.getEditText().setError("Password must be equal to or greater than 6 characters");
+                        mPassword.getEditText().setError(getString(R.string.shortPassword));
                     }
                 } else {
-                    mEmail.getEditText().setError("Domain must be @gmail.com");
+                    mEmail.getEditText().setError(getString(R.string.invalidEmail));
                 }
             } else {
-                mConfirmPassword.getEditText().setError("Passwords don't match");
+                mConfirmPassword.getEditText().setError(getString(R.string.passwordNotMatched));
             }
         } else {
-            Toast.makeText(getApplicationContext(), "Please fill in all the details", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.emptyForm), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -95,7 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
     //Method to add user
     private void register(final String fullName, final String contactNumber, final String state, final String city, final String email, final String password) {
         progressDialog = new ProgressDialog(SignUpActivity.this);
-        progressDialog.setMessage("Registering...");
+        progressDialog.setMessage(getString(R.string.registering));
         progressDialog.setCancelable(false);
         progressDialog.show();
         FirebaseAuth.getInstance()
@@ -107,13 +107,12 @@ public class SignUpActivity extends AppCompatActivity {
                     addUserNameToDb(fullName, contactNumber, state, city, email);
                     FirebaseAuth.getInstance().signOut();
                 } else {
-                    Toast.makeText(getApplicationContext(), "" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }
                 progressDialog.cancel();
             }
 
         });
-
     }
 
     //Method to send verification mail
@@ -140,7 +139,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 });
                         builder.show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.somethingWrong, Toast.LENGTH_SHORT).show();
                     }
                 }
 
