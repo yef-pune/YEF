@@ -37,8 +37,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Full Name"
-                android:inputType="textPersonName"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:inputType="textCapWords"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -100,8 +100,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="State"
-                android:inputType="text"
-                android:singleLine="true" />
+                android:inputType="textCapWords"
+                android:singleLine="true"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -120,7 +120,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="City"
-                android:inputType="text"
+                android:inputType="textCapWords"
                 android:singleLine="true" />
 
         </android.support.design.widget.TextInputLayout>

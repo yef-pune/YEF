@@ -3,4 +3,18 @@
     <string name="enterEmail">Enter registered email</string>
     <string name="enterPassword">Enter password</string>
     <string name="placeholder">PLACEHOLDER</string>
+
+    //Navigation Bar Menu Labels
+    <string name="home">Home</string>
+    <string name="careerGuidance">Career Guidance</string>
+    <string name="jobUpdates">Job Updates</string>
+    <string name="scholarships">Scholarships</string>
+    <string name="helplineNumber">Helpline</string>
+    <string name="softSkillDevelopment">Soft Skills Development</string>
+    <string name="Counselling">Counselling</string>
+    <string name="talkToUs">Talk to Us</string>
+    <string name="aboutApp">About the app</string>
+    <string name="signOut">Sign Out</string>
+
+
 </resources>

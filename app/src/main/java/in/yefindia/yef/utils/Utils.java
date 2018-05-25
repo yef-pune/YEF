@@ -4,7 +4,15 @@ package in.yefindia.yef.utils;
  * This class contains all constants and static methods
  */
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AlertDialog;
+
 public class Utils {
+
+    public static Context mContext;
 
     //DOMAIN
     public static final String DOMAIN="gmail.com";
@@ -50,5 +58,13 @@ public class Utils {
         return contactNumber.length() == 10;
     }
 
+    //Connection Checker
+    /*******************************************************************************************************************/
+    public static boolean isConnected(Context context) {
+        mContext = context;
+        ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
-}
+        return networkInfo != null && networkInfo.isConnected();
+    }
+    }

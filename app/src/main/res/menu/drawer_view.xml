@@ -2,20 +2,36 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_action_locate"
-            android:title="@string/placeholder" />
+            android:id="@+id/nav_Home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/home" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_action_locate"
-            android:title="@string/placeholder" />
+            android:id="@+id/nav_careerGuidance"
+            android:icon="@drawable/ic_career"
+            android:title="@string/careerGuidance" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_action_locate"
-            android:title="@string/placeholder" />
+            android:id="@+id/nav_jobUpdates"
+            android:icon="@drawable/ic_job"
+            android:title="@string/jobUpdates" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_action_locate"
-            android:title="@string/placeholder" />
+            android:id="@+id/nav_scolarship"
+            android:icon="@drawable/ic_scholarship"
+            android:title="@string/scholarships" />
+        <item
+            android:id="@+id/nav_helplineNumber"
+            android:icon="@drawable/ic_call"
+            android:title="@string/helplineNumber" />
+        <item
+            android:id="@+id/nav_Counselling"
+            android:icon="@drawable/ic_counselling"
+            android:title="@string/Counselling" />
+        <item
+            android:id="@+id/nav_aboutApp"
+            android:icon="@drawable/ic_about"
+            android:title="@string/aboutApp" />
+        <item
+            android:id="@+id/nav_signOut"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/signOut" />
     </group>
 </menu>

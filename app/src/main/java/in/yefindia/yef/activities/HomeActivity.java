@@ -1,16 +1,19 @@
 package in.yefindia.yef.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,37 +36,46 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference ref;
     private TextView userName;
+    private TextView userEmail;
+    private ImageView verIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        setupupFirebseAuth();
 
+        setupupFirebseAuth();
         setupNavigationView();
         getAndSetUserData();
     }
 
     private void getAndSetUserData() {
         userName=navigationView.getHeaderView(0).findViewById(R.id.userNameNavigationHeader);
+        userEmail=navigationView.getHeaderView(0).findViewById(R.id.userEmailNavigationHeader);
+        verIcon=navigationView.getHeaderView(0).findViewById(R.id.imageVerifiedUser);
         final FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
 
         if(currentUser!=null){
-            database=FirebaseDatabase.getInstance();
-            ref=database.getReference(Utils.FIREBASE_USERS_CHILD_NODE);
+            if(currentUser.isEmailVerified()){
+                database=FirebaseDatabase.getInstance();
+                ref=database.getReference(Utils.FIREBASE_USERS_CHILD_NODE);
 
-            ref.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    userName.setText(dataSnapshot.child(currentUser.getUid()).child("fullName").getValue(String.class));
-                }
+                ref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        userName.setText(dataSnapshot.child(currentUser.getUid()).child("fullName").getValue(String.class));
+                        userEmail.setText(dataSnapshot.child(currentUser.getUid()).child("email").getValue(String.class));
+                        verIcon.setImageResource(R.drawable.ic_check_circle_white_11dp);
+                    }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                }
-            });
-        }
+                    }
+                });
+            }
+
+    }
     }
 
 
@@ -146,8 +158,12 @@ public class HomeActivity extends AppCompatActivity {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+
+
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 }
