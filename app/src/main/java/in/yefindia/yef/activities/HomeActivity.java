@@ -18,16 +18,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import in.yefindia.yef.R;
+import in.yefindia.yef.utils.Utils;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    FirebaseDatabase database;
+    DatabaseReference ref;
+    private TextView userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,29 @@ public class HomeActivity extends AppCompatActivity {
         setupupFirebseAuth();
 
         setupNavigationView();
+        getAndSetUserData();
+    }
+
+    private void getAndSetUserData() {
+        userName=navigationView.getHeaderView(0).findViewById(R.id.userNameNavigationHeader);
+        final FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
+
+        if(currentUser!=null){
+            database=FirebaseDatabase.getInstance();
+            ref=database.getReference(Utils.FIREBASE_USERS_CHILD_NODE);
+
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    userName.setText(dataSnapshot.child(currentUser.getUid()).child("fullName").getValue(String.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 
 
