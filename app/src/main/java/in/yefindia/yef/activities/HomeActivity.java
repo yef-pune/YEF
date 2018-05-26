@@ -25,8 +25,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import in.yefindia.yef.R;
+import in.yefindia.yef.fragments.AboutAppFragment;
 import in.yefindia.yef.fragments.CareerGuidanceFragment;
+import in.yefindia.yef.fragments.CounsellingFragment;
+import in.yefindia.yef.fragments.HelplineFragment;
 import in.yefindia.yef.fragments.HomeFragment;
+import in.yefindia.yef.fragments.JobUpdatesFragment;
+import in.yefindia.yef.fragments.ScholarshipFragment;
 import in.yefindia.yef.utils.Utils;
 
 public class HomeActivity extends AppCompatActivity {
@@ -49,6 +54,10 @@ public class HomeActivity extends AppCompatActivity {
         setupupFirebseAuth();
         setupNavigationView();
         getAndSetUserData();
+
+        //Default Selected Fragment
+        replaceFragment(R.id.nav_Home);
+        navigationView.setCheckedItem(R.id.nav_Home);
     }
 
     private void getAndSetUserData() {
@@ -163,13 +172,27 @@ public class HomeActivity extends AppCompatActivity {
         Fragment fragment=null;
 
         switch (id){
-            case R.id.nav_careerGuidance:
-                fragment=new CareerGuidanceFragment();
-                break;
-            default:
-               fragment=new HomeFragment();
-
-
+                case R.id.nav_Home:
+                    fragment=new HomeFragment();
+                    break;
+                case R.id.nav_careerGuidance:
+                    fragment=new CareerGuidanceFragment();
+                    break;
+                case R.id.nav_jobUpdates:
+                    fragment=new JobUpdatesFragment();
+                    break;
+                case R.id.nav_scolarship:
+                    fragment=new ScholarshipFragment();
+                    break;
+                case R.id.nav_helplineNumber:
+                    fragment=new HelplineFragment();
+                    break;
+                case R.id.nav_Counselling:
+                    fragment=new CounsellingFragment();
+                    break;
+                case R.id.nav_aboutApp:
+                    fragment=new AboutAppFragment();
+                    break;
         }
 
         if(fragment!=null){

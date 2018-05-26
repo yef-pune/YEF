@@ -29,9 +29,5 @@
             android:id="@+id/nav_aboutApp"
             android:icon="@drawable/ic_about"
             android:title="@string/aboutApp" />
-        <item
-            android:id="@+id/nav_signOut"
-            android:icon="@drawable/ic_signout"
-            android:title="@string/signOut" />
     </group>
 </menu>
