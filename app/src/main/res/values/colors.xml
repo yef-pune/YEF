@@ -3,4 +3,9 @@
     <color name="colorPrimary">#ef672e</color>
     <color name="colorPrimaryDark">#d7531b</color>
     <color name="colorAccent">#90be6d</color>
+
+    <color name="white">#ffffff</color>
+    <color name="whiteStatusBar">#d4d4d4</color>
+    <color name="splashScreenBackground">#FFFDFF</color>
+
 </resources>

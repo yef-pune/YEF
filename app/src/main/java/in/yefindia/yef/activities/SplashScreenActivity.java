@@ -15,7 +15,7 @@ import in.yefindia.yef.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    public static final int SPLASH_SCREEN_TIME=2;   // Specifies time of splash screen in seconds
+    public static final int SPLASH_SCREEN_TIME=3;   // Specifies time of splash screen in seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
