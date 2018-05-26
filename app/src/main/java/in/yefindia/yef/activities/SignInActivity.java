@@ -46,7 +46,7 @@ public class SignInActivity extends AppCompatActivity {
         textforgotPassword=findViewById(R.id.textView_forgotPassword);
         progressDialog=new ProgressDialog(SignInActivity.this);
         progressDialog.setCancelable(false);
-        progressDialog.setMessage("Please wait...");
+        progressDialog.setMessage("Signing in...");
         clearFields();
         setupupFirebseAuth();
         textforgotPassword.setOnClickListener(new View.OnClickListener() {
@@ -79,18 +79,21 @@ public class SignInActivity extends AppCompatActivity {
                               .addOnFailureListener(new OnFailureListener() {
                                   @Override
                                   public void onFailure(@NonNull Exception e) {
-                                      Toast.makeText(SignInActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                      Toast.makeText(SignInActivity.this,"Invalid email or password", Toast.LENGTH_LONG).show();
                                       progressDialog.cancel();
                                   }
                               });
                   }else{
+                      dismissProgressDialog();
                       editTextPassword.getEditText().setError(getString(R.string.shortPassword));
                   }
 
               }else{
+                  dismissProgressDialog();
                   editTextEmail.getEditText().setError(getString(R.string.invalidEmail));
               }
           }else {
+              dismissProgressDialog();
               Toast.makeText(SignInActivity.this, R.string.emptyForm,Toast.LENGTH_SHORT).show();
           }
            }
@@ -164,6 +167,12 @@ public class SignInActivity extends AppCompatActivity {
 
         if(editTextPassword.getEditText().getText().toString()!=null){
             editTextPassword.getEditText().setText("");
+        }
+    }
+
+    private void dismissProgressDialog(){
+        if(progressDialog.isShowing()){
+            progressDialog.cancel();
         }
     }
 }
