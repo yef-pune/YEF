@@ -2,11 +2,9 @@
     <string name="app_name" translatable="false">YEF</string>
 
 
-
     <string name="enterEmail" translatable="true">Enter registered email</string>
     <string name="enterPassword" translatable="true">Enter password</string>
     <string name="placeholder" translatable="false">PLACEHOLDER</string>
-
 
 
     //Navigation Bar Menu Labels
@@ -44,6 +42,9 @@
     //DrawerLayout
     <string name="openString" translatable="false">Open</string>
     <string name="closeString" translatable="false">Close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
