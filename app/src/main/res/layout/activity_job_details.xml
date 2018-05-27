@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".activities.JobDetailsActivity">
 
@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
@@ -51,9 +51,7 @@
                     tools:text="@string/dummyText" />
 
 
-
             </android.support.design.card.MaterialCardView>
-
 
 
             <android.support.design.button.MaterialButton
@@ -65,7 +63,7 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="@string/apply"
-                app:cornerRadius="24dp"/>
+                app:cornerRadius="24dp" />
 
         </LinearLayout>
 

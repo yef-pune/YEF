@@ -8,4 +8,6 @@
     <color name="whiteStatusBar">#d4d4d4</color>
     <color name="splashScreenBackground">#FFFDFF</color>
 
+    <color name="blackStroke">#212121</color>
+
 </resources>

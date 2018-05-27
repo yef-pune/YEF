@@ -1,5 +1,6 @@
 package in.yefindia.yef.adaptor;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,9 +20,11 @@ public class JobsAdaptor extends RecyclerView.Adapter<JobsAdaptor.JobsViewHolder
 
 
     private List<Job> jobList;
+    private Context context;
 
-    public JobsAdaptor(List<Job> jobList) {
+    public JobsAdaptor(List<Job> jobList,Context context) {
         this.jobList = jobList;
+        this.context=context;
     }
 
     @NonNull

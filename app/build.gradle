@@ -16,30 +16,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '28.0.0 rc2'
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0-alpha1'
     implementation 'com.android.support:design:28.0.0-alpha1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-//    Firebase
+    //    Firebase
     implementation 'com.google.firebase:firebase-core:12.0.1'
-//    Firebase Authentication
+    //    Firebase Authentication
     implementation 'com.google.firebase:firebase-auth:12.0.1'
-//     Firebase Real Time Database
+    //     Firebase Real Time Database
     implementation 'com.google.firebase:firebase-database:12.0.1'
-
-//    Design support and recyclerView
-//    implementation 'com.android.support:design:27.1.1'
+    //    Design support and recyclerView
+    //    implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:recyclerview-v7:28.0.0-alpha1'
-//    implementation 'com.android.support:cardview-v7:27.1.1'
-
-//    Picasso image loader
+    //    implementation 'com.android.support:cardview-v7:27.1.1'
+    //    Picasso image loader
     implementation 'com.squareup.picasso:picasso:2.71828'
 }
 apply plugin: 'com.google.gms.google-services'
