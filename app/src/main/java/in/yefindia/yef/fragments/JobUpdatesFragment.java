@@ -1,6 +1,7 @@
 package in.yefindia.yef.fragments;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +34,7 @@ public class JobUpdatesFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private List<Job> jobList;
+    ProgressDialog progressDialog;
 
     public JobUpdatesFragment() {
         // Required empty public constructor
@@ -43,6 +46,7 @@ public class JobUpdatesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Job Updates");
 
+        progressDialog=new ProgressDialog(getActivity());
         recyclerView=view.findViewById(R.id.recyclerview_JobFragment);
         makeRecyclerView();
 
@@ -56,6 +60,9 @@ public class JobUpdatesFragment extends Fragment {
     }
 
     private void makeRecyclerView() {
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Please wait while we update jobs......");
+        progressDialog.show();
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         jobList=new ArrayList<>();
@@ -77,6 +84,7 @@ public class JobUpdatesFragment extends Fragment {
                     recyclerView.getAdapter().notifyDataSetChanged();
                 }
 
+                progressDialog.cancel();
             }
 
             @Override
