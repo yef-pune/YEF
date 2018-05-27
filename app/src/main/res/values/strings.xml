@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">YEF</string>
 
 
-    <string name="enterEmail" translatable="true">Enter registered email</string>
+    <string name="enterEmail">Enter registered email</string>
     <string name="enterPassword" translatable="true">Enter password</string>
     <string name="placeholder" translatable="false">PLACEHOLDER</string>
 
