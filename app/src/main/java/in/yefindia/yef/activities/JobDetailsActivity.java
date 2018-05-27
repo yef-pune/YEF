@@ -5,6 +5,7 @@ import android.support.design.button.MaterialButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 import in.yefindia.yef.R;
@@ -31,6 +32,13 @@ public class JobDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Apply for the Job");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         title=findViewById(R.id.textView_jobTitle);
         companyName=findViewById(R.id.textView_companyName);
