@@ -1,16 +1,19 @@
 package in.yefindia.yef.adaptor;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
 import in.yefindia.yef.R;
+import in.yefindia.yef.activities.JobDetailsActivity;
 import in.yefindia.yef.model.Job;
 
 /*
@@ -35,12 +38,29 @@ public class JobsAdaptor extends RecyclerView.Adapter<JobsAdaptor.JobsViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull JobsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final JobsViewHolder holder, final int position) {
         holder.textJobTitle.setText(jobList.get(position).getJobTitle());
         holder.textCompanyName.setText(jobList.get(position).getCompanyName());
         holder.textJobLocation.setText(jobList.get(position).getLocation());;
         holder.textExperience.setText(jobList.get(position).getExperience());
         holder.textKeySkills.setText(String.format("Key skills: %s", jobList.get(position).getKeySkills()));
+
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context,JobDetailsActivity.class);
+                intent.putExtra("ID",jobList.get(position).getJobId());
+                intent.putExtra("Title",jobList.get(position).getJobTitle());
+                intent.putExtra("CompanyName",jobList.get(position).getCompanyName());
+                intent.putExtra("Location",jobList.get(position).getLocation());
+                intent.putExtra("Experience",jobList.get(position).getExperience());
+                intent.putExtra("KeySkills",jobList.get(position).getKeySkills());
+                intent.putExtra("Description",jobList.get(position).getDescription());
+                intent.putExtra("Salary",jobList.get(position).getSalary());
+                context.startActivity(intent);
+
+            }
+        });
     }
 
     @Override
@@ -55,6 +75,7 @@ public class JobsAdaptor extends RecyclerView.Adapter<JobsAdaptor.JobsViewHolder
         TextView textJobLocation;
         TextView textExperience;
         TextView textKeySkills;
+        RelativeLayout relativeLayout;
 
          JobsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +84,8 @@ public class JobsAdaptor extends RecyclerView.Adapter<JobsAdaptor.JobsViewHolder
             textJobLocation=itemView.findViewById(R.id.textView_jobLocation);
             textExperience=itemView.findViewById(R.id.textView_jobExperience);
             textKeySkills=itemView.findViewById(R.id.textView_jobKeySkills);
+            relativeLayout=itemView.findViewById(R.id.relativeLayout_job);
+
         }
     }
 }

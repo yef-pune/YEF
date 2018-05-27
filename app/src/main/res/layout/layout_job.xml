@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/relativeLayout_job"
     android:layout_margin="6dp">
 
     <TextView
@@ -16,7 +17,6 @@
         android:textStyle="bold"
         tools:text="Android Application Developer" />
 
-
     <TextView
         android:id="@+id/textView_companyName"
         android:layout_width="match_parent"
@@ -27,7 +27,6 @@
         android:textColor="@android:color/black"
         android:textSize="14sp"
         tools:text="ABC company" />
-
 
     <TextView
         android:id="@+id/textView_jobLocation"
@@ -64,8 +63,6 @@
         android:maxLines="2"
         android:textSize="12sp"
         tools:text="Key skills: Operational process management" />
-
-
 
 
 </RelativeLayout>

@@ -10,6 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,13 +57,34 @@ public class JobUpdatesFragment extends Fragment {
 
     private void makeRecyclerView() {
     recyclerView.setHasFixedSize(true);
-    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-    jobList=new ArrayList<>();
+    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        jobList=new ArrayList<>();
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+        DatabaseReference reference=firebaseDatabase.getReference("Jobs");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot childrenData:dataSnapshot.getChildren()){
+                 jobList.add(new Job(childrenData.child("jobID").getValue(String.class),
+                         childrenData.child("jobTitle").getValue(String.class),
+                         childrenData.child("companyName").getValue(String.class),
+                         childrenData.child("location").getValue(String.class),
+                         childrenData.child("experience").getValue(String.class),
+                         childrenData.child("keySkills").getValue(String.class),
+                         childrenData.child("description").getValue(String.class),
+                         childrenData.child("salary").getValue(String.class)));
+                    recyclerView.setAdapter(new JobsAdaptor(jobList,getActivity()));
+                    recyclerView.getAdapter().notifyDataSetChanged();
+                }
 
-    for(int i=0;i<10;i++){
-        jobList.add(new Job("ID:"+i,"Software Tester","Robosoft Technologies","Pune","3-5","Selenium,HP Quick Test Professional","Testing appa","20000"));
-    }
-    recyclerView.setAdapter(new JobsAdaptor(jobList,getActivity().getApplicationContext()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getActivity(),databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 }
