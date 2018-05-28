@@ -83,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
                         verIcon.setImageResource(R.drawable.ic_check_circle_white_11dp);
 
                         RegisterBloodDonationDialog.name=dataSnapshot.child(currentUser.getUid()).child("fullName").getValue(String.class);
-                        RegisterBloodDonationDialog.contact=dataSnapshot.child(currentUser.getUid()).child("contact").getValue(String.class);
+                        RegisterBloodDonationDialog.contact=dataSnapshot.child(currentUser.getUid()).child("contactNumber").getValue(String.class);
                         RegisterBloodDonationDialog.email=dataSnapshot.child(currentUser.getUid()).child("email").getValue(String.class);
                     }
 

@@ -71,13 +71,13 @@ public class BloodDonationFragment extends Fragment {
                 if(!campList.isEmpty()){
                     campList.clear();
                 }
-                for (DataSnapshot chilren:dataSnapshot.getChildren()) {
-                    campList.add(new BloodDonation(chilren.child("ID").getValue(String.class),
-                            chilren.child("City").getValue(String.class),
-                            chilren.child("Location").getValue(String.class),
-                            chilren.child("Date").getValue(String.class),
-                            chilren.child("Time").getValue(String.class),
-                            chilren.child("Contact").getValue(String.class)
+                for (DataSnapshot children:dataSnapshot.getChildren()) {
+                    campList.add(new BloodDonation(children.child("ID").getValue(String.class),
+                            children.child("City").getValue(String.class),
+                            children.child("Location").getValue(String.class),
+                            children.child("Date").getValue(String.class),
+                            children.child("Time").getValue(String.class),
+                            children.child("Contact").getValue(String.class)
                     ));
 
                     recyclerView.setAdapter(new BloodDonationAdapter(campList,getActivity()));
