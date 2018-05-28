@@ -40,9 +40,9 @@ public class JobDetailsActivity extends AppCompatActivity {
             }
         });
 
-        title=findViewById(R.id.textView_jobTitle);
+        title=findViewById(R.id.textView_campCity);
         companyName=findViewById(R.id.textView_companyName);
-        location=findViewById(R.id.textView_jobLocation);
+        location=findViewById(R.id.textView_campLocation);
         experience=findViewById(R.id.textView_jobExperience);
         keySkills=findViewById(R.id.textView_jobKeySkills);
         description=findViewById(R.id.textView_jobDescription);

@@ -10,7 +10,7 @@
     app:strokeColor="@color/blackStroke"
     app:strokeWidth="1dp">
 
-    <include layout="@layout/layout_job" />
+    <include layout="@layout/layout_job"/>
 
 
 </android.support.design.card.MaterialCardView>

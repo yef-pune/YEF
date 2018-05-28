@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.yefindia.yef.R;
-import in.yefindia.yef.adaptor.JobsAdaptor;
+import in.yefindia.yef.adapter.JobsAdapter;
 import in.yefindia.yef.model.Job;
 
 /**
@@ -80,7 +79,7 @@ public class JobUpdatesFragment extends Fragment {
                          childrenData.child("keySkills").getValue(String.class),
                          childrenData.child("description").getValue(String.class),
                          childrenData.child("salary").getValue(String.class)));
-                    recyclerView.setAdapter(new JobsAdaptor(jobList,getActivity()));
+                    recyclerView.setAdapter(new JobsAdapter(jobList,getActivity()));
                     recyclerView.getAdapter().notifyDataSetChanged();
                 }
 

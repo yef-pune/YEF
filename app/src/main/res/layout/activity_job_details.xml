@@ -45,7 +45,7 @@
                     android:id="@+id/textView_jobDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/textView_jobTitle"
+                    android:layout_below="@id/textView_campCity"
                     android:padding="8dp"
                     android:textSize="14sp"
                     tools:text="@string/dummyText" />

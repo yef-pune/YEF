@@ -1,4 +1,4 @@
-package in.yefindia.yef.adaptor;
+package in.yefindia.yef.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,13 +19,13 @@ import in.yefindia.yef.model.Job;
 /*
  * Created by Shashank Shinde.
  */
-public class JobsAdaptor extends RecyclerView.Adapter<JobsAdaptor.JobsViewHolder> {
+public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.JobsViewHolder> {
 
 
     private List<Job> jobList;
     private Context context;
 
-    public JobsAdaptor(List<Job> jobList,Context context) {
+    public JobsAdapter(List<Job> jobList, Context context) {
         this.jobList = jobList;
         this.context=context;
     }
@@ -79,9 +79,9 @@ public class JobsAdaptor extends RecyclerView.Adapter<JobsAdaptor.JobsViewHolder
 
          JobsViewHolder(@NonNull View itemView) {
             super(itemView);
-            textJobTitle=itemView.findViewById(R.id.textView_jobTitle);
+            textJobTitle=itemView.findViewById(R.id.textView_campCity);
             textCompanyName=itemView.findViewById(R.id.textView_companyName);
-            textJobLocation=itemView.findViewById(R.id.textView_jobLocation);
+            textJobLocation=itemView.findViewById(R.id.textView_campLocation);
             textExperience=itemView.findViewById(R.id.textView_jobExperience);
             textKeySkills=itemView.findViewById(R.id.textView_jobKeySkills);
             relativeLayout=itemView.findViewById(R.id.relativeLayout_job);

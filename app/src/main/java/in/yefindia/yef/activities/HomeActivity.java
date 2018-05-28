@@ -25,13 +25,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import in.yefindia.yef.R;
+import in.yefindia.yef.dialogs.RegisterBloodDonationDialog;
 import in.yefindia.yef.fragments.AboutAppFragment;
+import in.yefindia.yef.fragments.BloodDonationFragment;
 import in.yefindia.yef.fragments.CareerGuidanceFragment;
 import in.yefindia.yef.fragments.CounsellingFragment;
 import in.yefindia.yef.fragments.HelplineFragment;
 import in.yefindia.yef.fragments.HomeFragment;
 import in.yefindia.yef.fragments.JobUpdatesFragment;
 import in.yefindia.yef.fragments.ScholarshipFragment;
+import in.yefindia.yef.model.UserDetailsModel;
 import in.yefindia.yef.utils.Utils;
 
 public class HomeActivity extends AppCompatActivity {
@@ -74,9 +77,14 @@ public class HomeActivity extends AppCompatActivity {
                 ref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+
                         userName.setText(dataSnapshot.child(currentUser.getUid()).child("fullName").getValue(String.class));
                         userEmail.setText(dataSnapshot.child(currentUser.getUid()).child("email").getValue(String.class));
                         verIcon.setImageResource(R.drawable.ic_check_circle_white_11dp);
+
+                        RegisterBloodDonationDialog.name=dataSnapshot.child(currentUser.getUid()).child("fullName").getValue(String.class);
+                        RegisterBloodDonationDialog.contact=dataSnapshot.child(currentUser.getUid()).child("contact").getValue(String.class);
+                        RegisterBloodDonationDialog.email=dataSnapshot.child(currentUser.getUid()).child("email").getValue(String.class);
                     }
 
                     @Override
@@ -189,6 +197,9 @@ public class HomeActivity extends AppCompatActivity {
                     break;
                 case R.id.nav_Counselling:
                     fragment=new CounsellingFragment();
+                    break;
+                case R.id.nav_bloodDonation:
+                    fragment=new BloodDonationFragment();
                     break;
                 case R.id.nav_aboutApp:
                     fragment=new AboutAppFragment();
