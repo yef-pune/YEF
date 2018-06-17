@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.AboutAppFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="About the app" />
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="\t\t\tYouth Empowerment Foundation is a registered NGO under Societies Registration Act XXI of 1860 (Regd.No S/RS/SW- NG/0073/2017) working since June 2017. I hail from aseverely disadvantaged background and have struggled throughout my childhood and youth to complete aformal education. My vision was inspired by my own journey, froma remote village in Bihar to Delhi. Life was neither easy nor kind to me and I found the need to work as a child laborer in the factories of Kirti Nagar, Delhi to support my family andmy father’s treatment, financially.I worked as a carpenter, an office boy, a data entry operator etc. at various places to earn better wages and to be able to cater to my family’slivingexpenses. Never the less, a midst all these challenging situations, I still managed to continue my studies,fortunately and my strong zeal for education paved the way to achieving an Engineering degree in 2016 from NPTI, one of the most esteemed colleges of Guru Gobind Singh Indraprastha University, New Delhi, where I was awarded a scholarship to pursue my education further. I secured the 9th rank in the University entrance exam. Currently, I am an Engineer in a German MNC and I’m working with the cutting-edge technology of Power Generation, globally. I’ve had the opportunity to travel to Germany and other countries because my job demanded that of me." />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="\t\t\tDespite constant travelling and my busy schedule at work, I have not forgotten my roots. I am committed to serving underprivileged children to help them pursue their education. This was the genesis of Youth Empowerment Foundation. We are working towards empowering young minds to impact our community with a positive change. The foundation has been investing in community projects since June 2017, aiming to deliver holistic education including skills and extra-curricular activities to underprivileged children and the youth."/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="\t\t\tI not only fund my total salary to the Foundation but also spend quality time with the Foundation team and community leaders to guide them in achieving the objectives of our initiative. I inspire the students associated with my initiatives since they can relate to me and I truly believe that changing their life for the better is possible just like I made a change in my life. I believe that life is to utilized either for serving our family or the society as a whole. The best utilization of life is when we live our life to make someone else’s life easier. I consider the society as my family and I am working persistently toward sits up liftment."/>
+    </LinearLayout>
+
+</ScrollView>

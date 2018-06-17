@@ -3,6 +3,7 @@ package in.yefindia.yef.activities;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +27,7 @@ import in.yefindia.yef.utils.Utils;
 public class SignUpActivity extends AppCompatActivity {
 
     private TextInputLayout mFullName, mEmail, mContactNumber, mState, mCity, mPassword, mConfirmPassword;
-    private Button signupButton;
+    private MaterialButton signupButton;
     private ProgressDialog progressDialog;
 
 
